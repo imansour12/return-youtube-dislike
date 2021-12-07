@@ -4,9 +4,12 @@
     <meta content="text/html; charset=utf-8" />
     <title>Return YouTube Dislike</title>
     <link rel="stylesheet" href="popup.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <center>
@@ -18,33 +21,36 @@
       <button id="link_github">GitHub</button>
       <button id="link_discord">Discord</button>
 
-      <br><br>
+      <br /><br />
       <p>Donate</p>
       <button id="link_patreon">Patreon</button>
       <button id="link_yoomoney">Yoomoney</button>
-      <br>
+      <br />
 
-      <br>
-<!--      <button id="advancedToggle">Show Settings</button>-->
-      <br>
-
+      <br />
+      <button id="advancedToggle">Show Settings</button>
+      <br />
     </center>
 
     <fieldset id="advancedSettings">
       <legend id="advancedLegend">Settings</legend>
 
       <label class="switch">
-        <input type="checkbox" id="disable_ratio_bar" />
+        <input
+          type="checkbox"
+          id="disable_ratio_bar"
+          onClick="toggleStarRating()"
+        />
         <span class="slider" />
-        <span class="switchLabel">Lorem ipsum dolor sit amet</span> </label
+        <span class="switchLabel">Show star rating</span> </label
       ><br />
-
+      <!--
       <label class="switch">
         <input type="checkbox" id="disable_api_unlisted" />
         <span class="slider" />
         <span class="switchLabel">Lorem ipsum dolor sit amet</span> </label
       ><br />
-    </fieldset>
+    --></fieldset>
   </body>
   <script src="popup.js"></script>
 </html>

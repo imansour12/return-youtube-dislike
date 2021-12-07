@@ -1,6 +1,7 @@
 /*   Config   */
 const config = {
   advanced: false,
+  starRating: false,
   showAdvancedMessage: "Show Settings",
   hideAdvancedMessage: "Hide Settings",
 
@@ -9,7 +10,34 @@ const config = {
     github: "https://github.com/Anarios/return-youtube-dislike",
     discord: "https://discord.gg/mYnESY4Md5",
     patreon: "https://www.patreon.com/returnyoutubedislike",
-    yoomoney: "https://returnyoutubedislike.com/pay/yoomoney"
+    yoomoney: "https://returnyoutubedislike.com/pay/yoomoney",
+  },
+};
+
+//This doesn't work
+chrome.runtime.sendMessage(
+  {
+    greeting: "hello",
+  },
+  function (response) {
+    console.log(response.farewell);
+  }
+);
+//neither does this
+// localStorage.setItem("config", JSON.stringify(config));
+
+var configg = {
+  advanced: false,
+  starRating: false,
+  showAdvancedMessage: "Show Settings",
+  hideAdvancedMessage: "Hide Settings",
+
+  links: {
+    website: "https://returnyoutubedislike.com",
+    github: "https://github.com/Anarios/return-youtube-dislike",
+    discord: "https://discord.gg/mYnESY4Md5",
+    patreon: "https://www.patreon.com/returnyoutubedislike",
+    yoomoney: "https://returnyoutubedislike.com/pay/yoomoney",
   },
 };
 

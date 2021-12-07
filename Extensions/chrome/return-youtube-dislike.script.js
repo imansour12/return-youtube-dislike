@@ -5,7 +5,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 (function (extensionId) {
   let storedData = {
     dislikes: 0,
-    previousState: NEUTRAL_STATE
+    previousState: NEUTRAL_STATE,
   };
 
   function cLog(message, writer) {
@@ -18,9 +18,8 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
   }
 
   function getButtons() {
-
     //---   If Menu Element Is Displayed:   ---//
-    if (document.getElementById('menu-container')?.offsetParent === null) {
+    if (document.getElementById("menu-container")?.offsetParent === null) {
       return document.querySelector(
         "ytd-menu-renderer.ytd-watch-metadata > div"
       );
@@ -74,8 +73,6 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
     getButtons().children[1].querySelector("#text").innerText = dislikesCount;
   }
 
-
-
   function setState() {
     let statsSet = false;
     chrome.runtime.sendMessage(
@@ -125,7 +122,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
   }
 
   function likeClicked() {
-    console.log(storedData.previousState)
+    console.log(storedData.previousState);
     if (storedData.previousState == DISLIKED_STATE) {
       storedData.dislikes--;
       setDislikes(numberFormat(storedData.dislikes));
@@ -159,7 +156,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
   function getVideoId(url) {
     const urlObject = new URL(url);
     const pathname = urlObject.pathname;
-    if (pathname.startsWith('/clips')) {
+    if (pathname.startsWith("/clips")) {
       return document.querySelector("meta[itemprop='videoId']").content;
     } else {
       return urlObject.searchParams.get("v");
@@ -178,14 +175,14 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
     const int = Math.floor(Math.log10(num) - 2);
     const decimal = int + (int % 3 ? 1 : 0);
     const value = Math.floor(num / 10 ** decimal);
-    return value * (10 ** decimal);
+    return value * 10 ** decimal;
   }
 
   function numberFormat(numberState) {
     const userLocales = navigator.language;
 
     const formatter = Intl.NumberFormat(userLocales, {
-      notation: 'compact'
+      notation: "compact",
     });
 
     return formatter.format(roundDown(numberState));
@@ -260,6 +257,50 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
       ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
     }
   }
+  //Doesn't work yet but will when put in createRateBar func
+  function createStars(likes, dislikes) {
+    var total = likes + dislikes;
+    var percent = (likes / total) * 100;
+    var halfstars = 0;
+    console.log(total);
+    console.log(percent);
+    if (percent >= 0 && percent <= 4) {
+      halfstars = 0;
+    }
+    if (percent >= 5 && percent <= 14) {
+      halfstars = 1;
+    }
+    if (percent >= 15 && percent <= 24) {
+      halfstars = 2;
+    }
+    if (percent >= 25 && percent <= 34) {
+      halfstars = 3;
+    }
+    if (percent >= 35 && percent <= 44) {
+      halfstars = 4;
+    }
+    if (percent >= 45 && percent <= 54) {
+      halfstars = 5;
+    }
+    if (percent >= 55 && percent <= 64) {
+      halfstars = 6;
+    }
+    if (percent >= 65 && percent <= 74) {
+      halfstars = 7;
+    }
+    if (percent >= 75 && percent <= 84) {
+      halfstars = 8;
+    }
+    if (percent >= 85 && percent <= 94) {
+      halfstars = 9;
+    }
+    if (percent >= 95 && percent <= 100) {
+      halfstars = 10;
+    }
+    console.log(halfstars);
+
+    //How do i get the config object from the file popup.js to this file
+  }
 
   function sendVideoIds() {
     const ids = Array.from(
@@ -287,8 +328,6 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
     window.returnDislikeButtonlistenersSet = false;
     setEventListeners();
   });
-
-
 
   setTimeout(() => sendVideoIds(), 2500);
 })(document.currentScript.getAttribute("extension-id"));
